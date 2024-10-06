@@ -1,0 +1,110 @@
+import javax.swing.JOptionpane;
+public class listaDupla_nao_ordenada{
+    private static class Lista{
+        public int num;
+        public Lista prox;
+        public Lista ant;
+    }
+    public sattic void main (String []args){
+        Lista inicio=null;
+        Lista fim=null;
+        Lista aux;
+
+        int op;
+        do{
+            String menu=  "Menu de opções\n"
+            + "1 - Inserir no inicio da lista\n"
+            + "2 - Inserir no fim da lista\n"
+            + "3 - Consultar a lista do inicio ao fim\n"
+            + "4 - Consultar a lista do FIM ao INICIO\n"
+            + "5 - Sair\n"
+            + "\nDigite sua opção: ";
+
+            op= Integer.parseInt(JOptionPane.showInputDialog(menu));
+            swing(op){
+                case 1:
+                String numInicio = JOptionPane.showInputDialog("Digite o número a ser inserido no início da lista:");
+                Lista novoInicio = new Lista();
+                novoInicio.num = Integer.parseInt(numInicio);
+                if (inicio == null) {
+               
+                    inicio = novoInicio;
+                    fim = novoInicio;
+                    novoInicio.prox = inicio;
+                    novoInicio.ant = inicio;
+                } else {
+                    novoInicio.prox = inicio;
+                    inicio.ant = novoInicio;
+                    novoInicio.ant = fim;
+                    fim.prox = novoInicio;
+                    inicio = novoInicio;
+                }
+                JOptionPane.showMessageDialog(null, "Número inserido no início da Lista!!");
+                break;
+                
+            case 2:
+           
+                String numFim = JOptionPane.showInputDialog("Digite um número a ser inserido no fim da lista:");
+                Lista novoFim = new Lista();
+                novoFim.num = Integer.parseInt(numFim);
+                if (inicio == null) {
+           
+                    inicio = novoFim;
+                    fim = novoFim;
+                    novoFim.prox = inicio;
+                    novoFim.ant = inicio;
+                } else {
+                
+                    fim.prox = novoFim;
+                    novoFim.ant = fim;
+                    fim = novoFim;
+                    fim.prox = inicio;
+                    inicio.ant = fim;
+                }
+                JOptionPane.showMessageDialog(null, "Número inserido no fim da Lista!!");
+                break;
+                
+            case 3:
+            
+                if (inicio == null) {
+                    JOptionPane.showMessageDialog(null, "Lista vazia!!");
+                } else {
+                    StringBuilder listaInicioFim = new StringBuilder("Consultando a lista do início ao fim:\n");
+                    aux = inicio;
+                    do {
+                        listaInicioFim.append(aux.num).append(" ");
+                        aux = aux.prox;
+                    } while (aux != inicio);
+                    JOptionPane.showMessageDialog(null, listaInicioFim.toString());
+                }
+                break;
+                
+            case 4:
+           
+                if (inicio == null) {
+                    JOptionPane.showMessageDialog(null, "Lista vazia!!");
+                } else {
+                    StringBuilder listaFimInicio = new StringBuilder("Consultando a lista do FIM ao INICIO:\n");
+                    aux = fim;
+                    do {
+                        listaFimInicio.append(aux.num).append(" ");
+                        aux = aux.ant;
+                    } while (aux != fim);
+                    JOptionPane.showMessageDialog(null, listaFimInicio.toString());
+                }
+                break;
+                
+            case 5:
+            
+                JOptionPane.showMessageDialog(null, "Saindo...");
+                break;
+                
+            default:
+                JOptionPane.showMessageDialog(null, "Opção INVÁLIDA");
+                break;
+        }
+        
+    } while (op != 5);
+}
+            }
+   
